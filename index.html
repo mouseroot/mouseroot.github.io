@@ -28,7 +28,6 @@
 				//Drag item around
 				var i = document.getElementById("item");
 				i.addEventListener("touchmove",function(e){
-					e.preventDefault();
 					//If only 1 finger
 					if(e.targetTouches.length == 1)
 					{
@@ -36,6 +35,7 @@
 						i.style.left = touch.pageX + "px";
 						i.style.top = touch.pageY + "px";
 					}
+					e.preventDefault();
 				},false);
 			});
 		</script>
