@@ -21,6 +21,8 @@
 
 		<script type="text/javascript">
 			$(document).ready(function(){
+				
+				//Drag item around
 				var i = document.getElementById("item");
 				i.addEventListener("touchmove",function(e){
 					//If only 1 finger
@@ -31,6 +33,11 @@
 						i.style.top = touch.pageY + "px";
 					}
 				},false);
+				
+				//Prevent page from springing on iphone
+				document.addEventListener('touchmove', function(e) {
+    				e.preventDefault();
+				}, false);
 			});
 		</script>
 	</body>
