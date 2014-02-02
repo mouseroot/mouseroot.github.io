@@ -6,5 +6,23 @@
 	</head>
 	<body>
 		<p>Hello world</p>
+<<<<<<< HEAD
 	</body>
 </html>
+=======
+		<div id="item">Item</div>
+		<script type="text/javascript">
+			var i = document.getElementById("item");
+			i.addEventListener("touchmove",function(e){
+				//If only 1 finger
+				if(e.targetTouches.length == 1)
+				{
+					var touch = e.targetTouches[0];
+					i.style.left = touch.pageX + "px";
+					i.style.top = touch.pageY + "px";
+				}
+			},false);
+		</script>
+	</body>
+</html>
+>>>>>>> Updated index
