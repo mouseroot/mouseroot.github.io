@@ -25,19 +25,15 @@
 				//Drag item around
 				var i = document.getElementById("item");
 				i.addEventListener("touchmove",function(e){
+					e.preventDefault();
 					//If only 1 finger
 					if(e.targetTouches.length == 1)
 					{
 						var touch = e.targetTouches[0];
-						i.style.left = (touch.pageX - i.style.width) + "px";
-						i.style.top = (touch.pageY - i.style.height) + "px";
+						i.style.left = touch.pageX + "px";
+						i.style.top = touch.pageY + "px";
 					}
 				},false);
-				
-				//Prevent page from springing on iphone
-				document.addEventListener('touchmove', function(e) {
-    				e.preventDefault();
-				}, false);
 			});
 		</script>
 	</body>
