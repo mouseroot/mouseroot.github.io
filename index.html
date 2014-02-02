@@ -7,41 +7,12 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 		<script src="http://code.jquery.com/jquery.min.js"></script>
 		<style type="text/css">
-			#item {
-				position: absolute;
-				border: solid 1px black;
-				width: 125px;
-				text-align: center;
-				height: 75px;
-				color: white;
+			#draw {
 				background: black;
 			}
 		</style>
 	</head>
 	<body>
-		<p>Hello world</p>
-		<div id="item" style="border: 1px solid black; width: 50px;">Item</div>
-
-		<script type="text/javascript">
-			$(document).ready(function(){
-				
-				//Drag item around
-				var i = document.getElementById("item");
-				i.addEventListener("touchmove",function(e){
-					//If only 1 finger
-					if(e.targetTouches.length == 1)
-					{
-						var touch = e.targetTouches[0];
-						i.style.left = touch.pageX + "px";
-						i.style.top = touch.pageY + "px";
-					}
-				},false);
-				
-				//Document move
-				document.addEventListener('touchmove', function(e) {
-    				e.preventDefault();
-				}, false);
-			});
-		</script>
+		<canvas id="draw" style="width: 100%; height: 100%"></canvas>
 	</body>
 </html>
