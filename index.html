@@ -12,18 +12,6 @@
 				background-color: red;
 			}
 			
-			/* Portrait */
-			@media screen and (max-width: 320px)
-			{
-				#draw { background: green; }
-			}
-			 
-			/* Landscape */
-			@media screen and (min-width: 321px)
-			{
-				#draw { background: red; }
-			}
-		
 			#draw {
 				position: absolute;
 				top: 0px;
@@ -45,6 +33,16 @@
 			document.addEventListener("touchmove",function(e){
 				e.preventDefault();
 			});
+			
+			window.onorientationchange = function(e) {
+				if (Math.abs(window.orientation) === 90) {
+	        	// Landscape
+	        		$("#draw").css("background","red");
+	    		} else {
+	    		// Portrait
+	    			$("#draw").css("background","green");
+	    		}
+			}
 		</script>
 	</body>
 </html>
