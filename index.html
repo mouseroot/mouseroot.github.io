@@ -3,24 +3,28 @@
 	<head>
 		<title>Mobile App</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+		<script src="http://code.jquery.com/jquery.min.js"></script>
 	</head>
 	<body>
 		<p>Hello world</p>
 	</body>
 </html>
 		<div id="item" style="border: 1px solid black">Item</div>
+
 		<script type="text/javascript">
-			var i = document.getElementById("item");
-			i.addEventListener("touchmove",function(e){
-				//If only 1 finger
-				if(e.targetTouches.length == 1)
-				{
-					var touch = e.targetTouches[0];
-					i.style.left = touch.pageX + "px";
-					i.style.top = touch.pageY + "px";
-					alert("X: " + touch.pageX + " Y: " + touch.pageY);
-				}
-			},false);
+			$(document).ready(function(){
+				var i = document.getElementById("item");
+				i.addEventListener("touchmove",function(e){
+					//If only 1 finger
+					if(e.targetTouches.length == 1)
+					{
+						var touch = e.targetTouches[0];
+						i.style.left = touch.pageX + "px";
+						i.style.top = touch.pageY + "px";
+						alert("X: " + touch.pageX + " Y: " + touch.pageY);
+					}
+				},false);
+			});
 		</script>
 	</body>
 </html>
