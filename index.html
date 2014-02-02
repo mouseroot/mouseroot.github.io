@@ -29,8 +29,8 @@
 					if(e.targetTouches.length == 1)
 					{
 						var touch = e.targetTouches[0];
-						i.style.left = touch.pageX + "px";
-						i.style.top = touch.pageY + "px";
+						i.style.left = (touch.pageX - i.style.width) + "px";
+						i.style.top = (touch.pageY - i.style.height) + "px";
 					}
 				},false);
 				
