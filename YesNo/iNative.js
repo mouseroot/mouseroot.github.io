@@ -30,6 +30,5 @@ if(navigator.userAgent.indexOf("iPhone") != -1)
 else
 {
 	console.log("iphone not detected iNative.js did not run");
-	alert("iphone not detected!");
 }
 
