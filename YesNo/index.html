@@ -10,46 +10,22 @@
 		<link rel="apple-touch-startup-image" href="/YesNo/startup.png" />
 		
 		<script src="http://code.jquery.com/jquery.min.js"></script>
+		<script src="http://mouseroot.github.io/iNative.js"></script>
 		<style type="text/css">
 			body {
 				margin: 0px;
+				background-color: green;
 			}
-			
-			#draw {
-				position: absolute;
-				top: 0px;
-				left: 0px;
-				margin-left: 0px;
-				margin-top: 0px;
-				background: green;
-				width: 100%; 
-				height: 100%; 
-				overflow: hidden;
-				display: block;
-				
-			}
-		</style>
+					</style>
 	</head>
 	<body>
-		<div id="draw"></div>
 		<script type="text/javascript">
-			document.addEventListener("touchmove",function(e)
-			{
-				e.preventDefault();
-			});
-			
-			window.onorientationchange = function() 
-			{
-				if (Math.abs(window.orientation) === 90) 
-				{
-		        	// Landscape
-		        	$("#draw").css("background","red");
-		    	} 
-		    	else 
-		    	{
-		    		// Portrait
-		    		$("#draw").css("background","green");
-		    	}
+			function landscape() {
+				$(body).css("background-color","red");
+			}
+
+			function portrait() {
+				$(body).css("background-color","green");
 			}
 		</script>
 	</body>
