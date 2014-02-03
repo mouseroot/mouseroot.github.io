@@ -4,9 +4,6 @@
 */
 if(navigator.userAgent.indexOf("iPhone") != -1)
 {
-	function landscape(){};
-	function portrait()();
-
 	//Prevent Safari spring behavoir
 	document.addEventListener("touchmove",function(e) {
 		e.preventDefault();
