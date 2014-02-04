@@ -24,7 +24,7 @@
 				margin-left: 0px;
 				margin-top: 0px;
 				background: white;
-				font-size: 21pt;
+				font-size: 23pt;
 				width: 100%; 
 				height: 100%; 
 				overflow: hidden;
@@ -43,23 +43,20 @@
 				background: #ccc;
 			}
 
-			#new {
+			#banner {
 				position: absolute;
-				border: solid 1px black;
-				right: 56px;
-				top: 48px;
-				height: 25px;
-				width: 50px;
+				left: 2px;
+				top: 2px;
 				text-align: center;
-				font-size: 17px;
-				background: #ccc;
+				color: white;
+				font-size: 50px;
 			}
 			
 		</style>
 	</head>
 	<body>
+		<div id="banner">Notepad</div>
 		<div id="add">+</div>
-		<div id="new">New</div>
 		<textarea id="notepad"></textarea>
 		<script type="text/javascript">
 			function landscape() {
@@ -71,8 +68,12 @@
 			}
 
 			$("#add").click(function(e){
-				alert("Add");
+				localStorage.notepad = $("#notepad").val();
 			});
+
+      		$(document).ready(function(){
+      			$("#notepad").val(localStorage.notepad);
+      		});
 		</script>
 	</body>
 </html>
