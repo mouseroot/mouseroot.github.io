@@ -51,28 +51,44 @@
 				color: white;
 				font-size: 50px;
 			}
+
+			#status {
+				position: absolute;
+				right: 60px;
+				top: 51px;
+				text-align: center;
+				color: white;
+				font-size: 19px;
+			}
 			
 		</style>
 	</head>
 	<body>
 		<div id="banner">Notepad</div>
+		<div id="status">Idle</div>
 		<div id="add">+</div>
 		<textarea id="notepad"></textarea>
 		<script type="text/javascript">
 			function landscape() {
-				alert("Landscape mode");
+				//alert("Landscape mode");
 			}
 
 			function portrait() {
-				alert("Portrait mode");
+				//alert("Portrait mode");
 			}
 
 			$("#add").click(function(e){
 				localStorage.notepad = $("#notepad").val();
+				$("#status").text("Saved");
 			});
 
       		$(document).ready(function(){
       			$("#notepad").val(localStorage.notepad);
+      			$("#status").text("Loaded");
+      		});
+
+      		$("#notepad").on("touchstart",function(e){
+      			#("#status").text("Idle");
       		});
 		</script>
 	</body>
