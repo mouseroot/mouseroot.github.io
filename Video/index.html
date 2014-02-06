@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<title>Raster graphics with screen.js</title>
+		<link rel="stylesheet" href="screen.css" type="text/css" />
+		<script src="screen.js"></script>
+	</head>
+	<body>
+		<canvas id="screen" width="500px" height="500px"></canvas>
+		<button id="btnPowerOn">Power ON</button>
+		<button id="btnPowerOff" style="display: none;position: relative">Power OFF</button>
+		<button id="btnClear">Clear</button>
+		<script type="text/javascript">
+
+			var screenObject = document.getElementById("screen").getContext("2d");
+			var pixels = screenObject.getImageData(0,0,500,500);
+			var currentAnimationFunction = staticScreen;
+			var loadingString = "Loading";
+			var consoleLogs = ["","","",""];
+			var logIndex = 0;
+			var _maxLoadingIters = 100;
+			var _iters = 0;
+			var mousex,mousey = 0;
+			var mainProgramLogs = ["Welcome to the main program (Bootloader)"];
+
+			//Power On pressed
+			document.getElementById("btnPowerOn").addEventListener("click",function(e){
+				currentAnimationFunction = loadingScreen;
+				_iters = 0;
+				logs("Powering up...");
+				this.style.display = "none";
+				document.getElementById("btnPowerOff").style.display = "block";
+			},false);
+
+			//Power Off pressed
+			document.getElementById("btnPowerOff").addEventListener("click",function(e){
+				currentAnimationFunction = staticScreen;
+				logs("Shutting down...");
+				this.style.display = "none";
+				document.getElementById("btnPowerOn").style.display = "block";
+				mainProgramLogs = [];
+			},false);
+
+			//Clear button pressed
+			document.getElementById("btnClear").addEventListener("click",function(e){
+				clearScreen();
+			},false);
+
+			//Canvas mouse move event
+			screenObject.canvas.addEventListener("mousemove", function(evt) {
+				var canv = this.getBoundingClientRect()
+        		mousex = evt.clientX - canv.left;
+        		mousey = evt.clientY - canv.top;
+        	},false);
+
+        	//Canvas mouse click event
+        	screenObject.canvas.addEventListener("click",function(evt){
+        		
+        		if(hitTestPoint(0,400,500,100,mousex,mousey))
+				{
+					printf("Console clicked");
+				}
+				else
+				{
+					printf("X: " + mousex + " Y: " + mousey);
+				}
+        	});
+
+    	    function hitTestPoint(x1, y1, w1, h1, x2, y2)
+		    {
+		    //x1, y1 = x and y coordinates of object 1
+		    //w1, h1 = width and height of object 1
+		    //x2, y2 = x and y coordinates of object 2 (usually midpt)
+			    if ((x1 <= x2 && x1+w1 >= x2) && (y1 <= y2 && y1+h1 >= y2))
+			    	return true;
+			    else
+			    	return false;
+		    }
+
+        	//Log string to debug window
+        	function logs(s)
+        	{
+        		if(consoleLogs.length > 3)
+        		{
+        			consoleLogs.shift();
+        		}
+        		consoleLogs.push(s);
+        	}
+
+        	//Print string to main display
+        	function printf(s)
+        	{
+        		if(mainProgramLogs.length > 14)
+        		{
+        			mainProgramLogs.shift();
+        		}
+        		mainProgramLogs.push(s);
+        	}
+
+        	//Clears the screen display
+        	function clearScreen()
+        	{
+        		mainProgramLogs = [];
+        		consoleLogs = [];
+        	}
+
+        	//Draws the mouse on the display
+			function drawMouse() 
+			{
+				screenObject.fillStyle = "orange";
+				screenObject.fillRect(mousex,mousey,5,5);
+			}
+
+			//Draw debuging screen
+			function drawDebugWindow()
+			{
+				screenObject.fillStyle = "blue";
+				screenObject.lineWidth = "1";
+				screenObject.lineJoin = "round";
+				screenObject.fillRect(0,400,500,100);
+				screenObject.strokeRect(1,400,498,98);
+				screenObject.fillStyle = "white";
+				screenObject.font = "12pt consolas";
+				for(var i=0;i < consoleLogs.length;i++)
+				{
+					screenObject.fillText(consoleLogs[i],10,415 + (i * 25),500);
+				}
+			}
+
+			function staticScreen()
+			{
+				requestAnimationFrame(currentAnimationFunction);
+				//Generate static
+				for(var i=0;i < pixels.data.length;i+=4)
+				{
+					pixels.data[i] = 255;
+					pixels.data[i + 1] = 255;
+					pixels.data[i + 2] = 255;
+					pixels.data[i + 3] = Math.floor((254-155)*Math.random()) + 156;
+				}
+				screenObject.putImageData(pixels,0,0,0,0,500,500);
+				//Draw 'No video input'
+				screenObject.fillStyle = "black";
+				screenObject.font = "30pt consolas";
+				screenObject.fillText("No video input",100,250,500);
+				drawDebugWindow();
+			}
+
+			function loadingScreen()
+			{
+				requestAnimationFrame(currentAnimationFunction);				
+				screenObject.fillStyle = "black";
+				screenObject.fillRect(0,0,500,500);
+				screenObject.fillStyle = "White";
+				screenObject.font = "30pt consolas";
+				screenObject.fillText(loadingString,50,250,500);
+				loadingString += ".";
+				drawDebugWindow();
+				if(_iters == _maxLoadingIters)
+				{
+					logs("Dummy loader finished!");
+					logs("Executing mainProgram");
+					printf("Capturing mouse input...Done");
+
+					currentAnimationFunction = mainProgram;
+					screenObject.canvas.style.cursor = "none";
+				}
+				loadingString = "Loading..." + _iters + "/" + _maxLoadingIters;
+				_iters++;
+			}
+
+			function mainProgram()
+			{
+				requestAnimationFrame(currentAnimationFunction);
+				screenObject.fillStyle = "black";
+				screenObject.fillRect(0,0,500,500);
+				screenObject.font = "13pt consolas";
+				screenObject.fillStyle = "white";
+				for(var a=0;a < mainProgramLogs.length;a++)
+				{
+					screenObject.fillText(mainProgramLogs[a],5,17 + (a * 26),500);
+				}
+				
+				drawDebugWindow();
+				drawMouse();
+			}
+
+			requestAnimationFrame(currentAnimationFunction);
+			
+		</script>
+	</body>
+</html>
