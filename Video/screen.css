@@ -12,3 +12,13 @@
 	overflow: hidden;
 	display: block;
 }
+
+button {
+	position: relative;
+	width: 250px;
+	height: 45px;
+}
+
+#btnPowerOff {
+	display: none;
+}
