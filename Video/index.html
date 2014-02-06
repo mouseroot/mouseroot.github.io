@@ -3,6 +3,12 @@
 	<head>
 		<title>Raster graphics with screen.js</title>
 		<link rel="stylesheet" href="screen.css" type="text/css" />
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+		<link rel="apple-touch-icon" href="/Video/apple-touch-icon.png" />
+		<link rel="apple-touch-startup-image" href="/Video/startup.png" />
 		<script src="screen.js"></script>
 	</head>
 	<body>
@@ -17,7 +23,6 @@
 			var currentAnimationFunction = staticScreen;
 			var loadingString = "Loading";
 			var consoleLogs = ["","","",""];
-			var logIndex = 0;
 			var _maxLoadingIters = 100;
 			var _iters = 0;
 			var mousex,mousey = 0;
@@ -142,7 +147,7 @@
 				//Draw 'No video input'
 				screenObject.fillStyle = "black";
 				screenObject.font = "30pt consolas";
-				screenObject.fillText("No video input",100,250,500);
+				screenObject.fillText("No Video Input",100,250,500);
 				drawDebugWindow();
 			}
 
