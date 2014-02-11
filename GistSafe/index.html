@@ -11,11 +11,28 @@
 
 <body>
 	<div data-role="page">
-		<div data-role="header">Header</div>
+		<div data-role="header">Gist Safe</div>
 			<div role="main" class="ui-content">
-				<p>Some data here
+				<label for="url-1">Gist URL</label>
+    			<input data-clear-btn="false" name="url-1" id="url-1" value="" type="url">
+    			<table data-role="table" id="table-column-toggle" data-mode="" class="ui-responsive table-stroke">
+				     <thead>
+				       <tr>
+				         <th data-priority="2">#</th>
+				         <th>Langauge</th>
+				         <th data-priority="3">Desc</th>
+				       </tr>
+				     </thead>
+				     <tbody>
+				       <tr>
+				         <th>0</th>
+				         <td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Javascript Examples</a></td>
+				         <td>Example Gist</td>
+				       </tr>
+				   </tbody>
+				</table>
 			</div>
-		<div data-role="footer">Footer</div>
+		<div data-role="footer">By: Mousetech</div>
 	</div>
 </body>
 </html>
